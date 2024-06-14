@@ -1,27 +1,42 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import "../Login/Login.css";
-import { useContext } from "react";
 import { AuthContext } from "../../../Hook/AuthProvider";
-import { useState } from "react";
+
 
 const Register = () => {
-  const { signUp } = useContext(AuthContext);
+  const { googleSignIn, emailSign } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleRegister = () => {
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-      setError(" eight characters & one letter and one number:");
-      console.log("hello");
-    } else {
-      setError("");
-      console.log("hello2");
-      signUp(email, password).then((result) => console.log(result.user));
+  
+
+  const handleLogin = () => {
+    if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/.test(password)){
+      setError(
+        "Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character:"
+      );
+    }
+    else{
+      setError("")
+      if(email){
+        emailSign(email,password).then(res=>console.log(res.user))
+      }
     }
   };
+
+  const handleGoogle = () => {
+    googleSignIn()
+      .then((res) => {
+        if (res.user) {
+          console.log(res, "Login in");
+        }
+      })
+      .catch(error=>console.log(error));
+  };
+  
   return (
     <div>
       <div>
@@ -33,17 +48,17 @@ const Register = () => {
               className="form-control"
               type="email"
               placeholder="Type Email"
+              name="email"
             />
             <input
               onChange={(e) => setPassword(e.target.value)}
               className="form-control"
               type="password"
               placeholder="Type Password"
+              name="password"
             />
-            <button onClick={handleRegister} className="Login-btn">
-              Register
-            </button>
-            <div className="login-btns">
+            <button onClick={()=>handleLogin()} className="Login-btn">Register</button>
+            <div onClick={() => handleGoogle()} className="login-btns">
               <button className="google-btn ">Google Login</button>
             </div>
           </div>

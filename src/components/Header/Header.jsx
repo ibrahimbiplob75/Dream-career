@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// /* eslint-disable no-unused-vars */
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../Hook/AuthProvider";
@@ -56,7 +56,7 @@ const Header = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">Career Hub</a>
+        <a className="btn btn-ghost normal-case text-xl">Dream Career</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>

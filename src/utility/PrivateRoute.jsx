@@ -1,17 +1,14 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import React from "react";
-import { Navigate, useLocation } from "react-router";
-import { useContext } from "react";
-import { AuthContext } from "../Hook/AuthProvider";
+import React, { Children, useContext } from 'react';
+import { AuthContext } from '../Hook/AuthProvider';
+import { Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({ children }) => {
-  const { user } = useContext(AuthContext);
+const PrivateRoute = ({children}) => {
+  const {user}=useContext(AuthContext)
 
-  if (user) {
-    return children;
+  if(user){
+    {Children}
   }
-  return <Navigate to="/login" replace></Navigate>;
+  return <Navigate to={"/login"}></Navigate> ;
 };
 
 export default PrivateRoute;

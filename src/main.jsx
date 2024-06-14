@@ -12,6 +12,7 @@ import Login from "./components/Authentication/Login/Login";
 import Register from "./components/Authentication/Register/Register";
 import PrivateRoute from "./utility/PrivateRoute";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/applied",
-        element: <AppliedJobs></AppliedJobs>,
+        element: (
+          <PrivateRoute>
+            <AppliedJobs></AppliedJobs>
+          </PrivateRoute>
+        ),
         loader: () => fetch("/jobs.json"), // warning: only load the data you need. do not load all the data
       },
       {
